@@ -34,7 +34,7 @@ Este proyecto automatiza la creación de un **cluster Kubernetes** usando **Ansi
 ## Instalación y uso
 1. Clonar el repositorio:
 ```bash
-git clone git@github.com:antonioleonsilva/ansible-k8s-cluster.git
+git clone https://github.com/antonioleonsilva/ansible-k8s-cluster
 cd ansible-k8s-cluster
 ```
 2. Revisar y modificar inventory/hosts.ini según tus nodos.
