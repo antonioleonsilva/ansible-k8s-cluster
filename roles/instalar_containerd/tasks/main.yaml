@@ -1,0 +1,25 @@
+---
+
+- name: Instalación de Containerd
+  apt:
+    name: containerd
+    state: present
+    update_cache: yes
+
+- name: Habilitar e iniciar Containerd
+  service:
+    name: containerd
+    state: started
+    enabled: yes
+
+- name:  Crear directorio de configuración de Containerd
+  file:
+    path: /etc/containerd
+    state: directory
+
+- name: Copiar fichero de configuración de Containerd
+  copy:
+    src: config.toml
+    dest: /etc/containerd
+  notify:
+    - Reiniciar containerd

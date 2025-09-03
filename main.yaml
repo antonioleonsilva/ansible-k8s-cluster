@@ -1,0 +1,26 @@
+---
+- name: Preparación de los nodos
+  hosts: all
+  become: true
+  roles:
+    - deshabilitar_swap
+    - instalar_containerd
+    - dependencias_kubernetes
+    - modulos_sysctl
+
+- name: Iniciación del Control Plane e instalación de CNI (Calico)
+  hosts: control_planes
+  become: true
+  roles: 
+    - iniciar_cluster
+    - instalar_kubectl
+    - instalar_calico
+
+- name: Unión de los nodos workers al clúster
+  hosts: workers
+  become: yes
+  roles:
+    - unir_workers
+    
+
+

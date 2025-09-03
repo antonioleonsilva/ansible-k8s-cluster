@@ -1,0 +1,29 @@
+---
+- name: Instalar dependencias para añadir repositorios
+  apt:
+    name:
+      - curl
+      - ca-certificates
+      - apt-transport-https
+    state: present
+    update_cache: yes
+
+- name: Descargar y añadir la clave GPG de Kubernetes
+  shell: |
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /usr/share/keyrings/kubernetes-apt-keyring.gpg
+  args:
+    creates: /usr/share/keyrings/kubernetes-apt-keyring.gpg
+
+- name:  Añadir repositorio de Kubernetes
+  apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /"
+    filename: kubernetes
+    state: present
+
+- name:  Instalación kubeadm y kubelet
+  apt:
+    name:
+      - kubeadm
+      - kubelet
+    state: present
+    update_cache: yes

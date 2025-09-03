@@ -1,0 +1,13 @@
+---
+- name: Cargar módulo br_netfilter
+  copy:
+    src: k8s-modules.conf
+    dest: /etc/modules-load.d
+  notify: Cargar modulo
+
+- name: Habilitar el reenvío de paquetes
+  copy:
+    src: k8s-sysctl.conf
+    dest: /etc/sysctl.d
+  notify: Aplicar sysctl
+

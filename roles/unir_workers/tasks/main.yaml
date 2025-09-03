@@ -1,0 +1,15 @@
+---  
+- name: Obtener comando de join desde el primer control plane
+  command: kubeadm token create --print-join-command
+  register: join_command_raw
+  delegate_to: "{{ groups['control_planes'][0] }}"
+  run_once: true
+
+- name: Guardar comando join en todos los hosts
+  set_fact:
+    kube_join_command: "{{ join_command_raw.stdout }}"
+
+- name: Unir workers al cluster
+  command: "{{ kube_join_command }}"
+  args:
+    creates: /etc/kubernetes/kubelet.conf

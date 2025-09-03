@@ -1,0 +1,16 @@
+- name: Instalar kubectl
+  apt:
+    name: kubectl
+    state: present
+    update_cache: yes
+
+- name: Crear directorio de configuración para kubectl
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+
+- name: Copiar kubeconfig para kubectl
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: "{{ ansible_env.HOME }}/.kube/config"
+    remote_src: yes

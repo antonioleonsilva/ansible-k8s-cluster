@@ -1,0 +1,13 @@
+---
+
+- name: Deshabilitar swap temporalmente (para evitar reiniciar)
+  command: swapoff -a
+  when: ansible_swaptotal_mb > 0
+
+- name: Deshabilitar swap permanentemente (tras reinicio)
+  lineinfile:
+    path: /etc/fstab
+    regexp: '^(?!#).*[\s]+swap[\s]+'
+    line: '# \g<0>'
+    backrefs: yes
+    backup: yes

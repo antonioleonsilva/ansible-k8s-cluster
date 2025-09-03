@@ -1,0 +1,6 @@
+---
+- name: Cargar modulo
+  command: modprobe br_netfilter
+
+- name: Aplicar sysctl
+  command: sysctl --system
