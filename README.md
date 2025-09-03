@@ -4,7 +4,6 @@
 ## Contenido
 - [Descripción](#descripción)  
 - [Requisitos](#requisitos)  
-- [Estructura del proyecto](#estructura-del-proyecto)  
 - [Instalación y uso](#instalación-y-uso)  
 - [Flujo del despliegue](#flujo-del-despliegue)  
 - [Compatibilidad](#compatibilidad)  
@@ -31,49 +30,6 @@ Este proyecto automatiza la creación de un **cluster Kubernetes** usando **Ansi
 
 ---
 
-## Estructura del proyecto
-
-ansible-k8s-cluster/
-├── README.md
-├── main.yaml
-├── inventory/
-│ └── hosts.ini
-├── roles/
-│ ├── dependencias_kubernetes/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ ├── deshabilitar_swap/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ ├── iniciar_cluster/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ ├── instalar_calico/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ ├── instalar_containerd/
-│ │ ├── tasks/
-│ │ │ └── main.yaml
-│ │ ├── handlers/
-│ │ │ └── main.yaml
-│ │ └── files/
-│ │ └── config.toml
-│ ├── instalar_kubectl/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ ├── unir_workers/
-│ │ └── tasks/
-│ │ └── main.yaml
-│ └── modulos_sysctl/
-│ ├── tasks/
-│ │ └── main.yaml
-│ ├── handlers/
-│ │ └── main.yaml
-│ └── files/
-│ ├── k8s-modules.conf
-│ └── k8s-sysctl.conf
-└── LICENSE
-
 
 ## Instalación y uso
 1. Clonar el repositorio:
@@ -87,6 +43,7 @@ cd ansible-k8s-cluster
 ```bash
 ansible-playbook -i inventory/hosts.ini main.yaml
 ```
+---
 
 ## Flujo del despliegue
 
@@ -96,11 +53,15 @@ ansible-playbook -i inventory/hosts.ini main.yaml
 4. Instalación de Calico CNI
 5. Unión de Workers al cluster → kubeadm join
 
+---
+
 ## Compatibilidad
 
 - Ubuntu Server 20.04 / 22.04
 - Debian 11 / 12
 - Derivados compatibles con los repos oficiales de Kubernetes
+
+---
 
 ## Licencia
 
